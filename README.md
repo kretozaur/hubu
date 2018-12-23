@@ -1,9 +1,14 @@
 E2E - flow test
 
-## Install
+## Installation 
 
 ```
 npm install hubu --save-dev
 ```
 
 # Examples
+
+## Test 
+```sh
+npm run test
+```
