@@ -3,7 +3,7 @@ E2E - flow test
 ## Install
 
 ```
-npm install flow-test-typescript --save-dev
+npm install hubu --save-dev
 ```
 
 # Examples
