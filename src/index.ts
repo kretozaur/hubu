@@ -5,7 +5,7 @@ import { StepBase } from "./StepBase";
 import { ActionStep } from "./ActionStep";
 import { RequestStep } from "./RequestStep";
 
-export class flowTest {
+export class hubu {
 
     private steps: StepBase[] = [];
 
@@ -13,7 +13,7 @@ export class flowTest {
 
     }
 
-    public request(name: string, url?: string, request?: any, before?: (context: flowTest) => void, after?: (context: flowTest) => void): flowTest {
+    public request(name: string, url?: string, request?: any, before?: (context: hubu) => void, after?: (context: hubu) => void): hubu {
 
         const step = new RequestStep();
         step.name = name;
@@ -26,7 +26,7 @@ export class flowTest {
         return this;
     }
 
-    public action(name: string, action: (context: flowTest) => void): flowTest {
+    public action(name: string, action: (context: hubu) => void): hubu {
 
         const step = new ActionStep();
         step.name = name;
@@ -37,7 +37,7 @@ export class flowTest {
         return this;
     }
 
-    public async start(): Promise<flowTest> {
+    public async start(): Promise<hubu> {
 
         for (const step of this.steps) {
             await this.executeStep(step);

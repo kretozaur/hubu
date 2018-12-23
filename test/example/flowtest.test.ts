@@ -1,9 +1,9 @@
-import { flowTest } from "../../src";
+import { hubu } from "../../src";
 import { RequestStep } from "../../src/RequestStep";
 
 describe('Flow test', function() {
     it('E2E test for REST api', (done) => {
-        const e2e = new flowTest("https://jsonplaceholder.typicode.com");
+        const e2e = new hubu("https://jsonplaceholder.typicode.com");
 
         e2e
             .request("users", "/users" )
