@@ -1,0 +1,35 @@
+{
+  "name": "hubu",
+  "version": "0.0.1",
+  "description": "flow test",
+  "main": ".out/index.js",
+  "types": ".ou/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "mocha ./.out/test/**/*.test.js --reporter spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kretozaur/hubu.git"
+  },
+  "author": "Marek Marcinkiewicz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kretozaur/hubu/issues"
+  },
+  "homepage": "https://github.com/kretozaur/hubu#readme",
+  "devDependencies": {
+    "@types/mocha": "^5.2.5",
+    "mocha": "^5.2.0",
+    "typescript": "^3.2.2"
+  },
+  "dependencies": {
+    "@types/request": "^2.48.1",
+    "chalk": "^2.4.1",
+    "request": "^2.88.0"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "keywords": []
+}

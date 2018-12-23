@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2015",
+    "moduleResolution": "node",
+    "rootDir": "./",
+    "outDir": ".out",
+    "sourceMap": true,
+    "allowJs": true,
+    "noImplicitAny": true,
+    "noUnusedLocals": false,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
+    "noImplicitReturns": true,
+    "preserveConstEnums": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "forceConsistentCasingInFileNames": true,
+    "lib": ["es6", "dom", "esnext"],
+  },
+  "exclude": [ "node_modules"],
+  "types": [ "typePatches" ]
+}
