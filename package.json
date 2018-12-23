@@ -1,12 +1,12 @@
 {
   "name": "hubu",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "flow test",
-  "main": ".out/index.js",
-  "types": ".ou/index.d.ts",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "test": "mocha ./.out/test/**/*.test.js --reporter spec"
+    "test": "mocha ./dist/test/**/*.test.js --reporter spec"
   },
   "repository": {
     "type": "git",
