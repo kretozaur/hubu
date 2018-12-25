@@ -1,32 +1,37 @@
 import * as Request from "request"
 import chalk from 'chalk'
 
-import { StepBase } from "./StepBase";
-import { ActionStep } from "./ActionStep";
-import { RequestStep } from "./RequestStep";
+import { StepBase } from "./models/StepBase";
+import { ActionStep } from "./models/ActionStep";
+import { RequestStep } from "./models/RequestStep";
+import { optionRequest } from "./models/optionRequest";
+import { optionAction } from "./models/optionAction";
 
 export class hubu {
 
     private steps: StepBase[] = [];
 
     constructor(private baseEndpointUrl?: string) {
-
     }
 
-    public request(name: string, url?: string, request?: any, before?: (context: hubu) => void, after?: (context: hubu) => void): hubu {
+    public request(name: string, option: optionRequest): hubu {
+
+        const { url, request, before, after } = option;
 
         const step = new RequestStep();
         step.name = name;
         step.url = url;
         step.request = request;
         step.before = before;
-        step.after = after = after;
+        step.after = after;
         this.steps.push(step);
 
         return this;
     }
 
-    public action(name: string, action: (context: hubu) => void): hubu {
+    public action(name: string, option: optionAction): hubu {
+
+        const { action } = option;
 
         const step = new ActionStep();
         step.name = name;
@@ -52,17 +57,17 @@ export class hubu {
 
     private async executeStep(step: StepBase): Promise<void> {
 
-        console.log(`${chalk.green(`executeStep: ${step.name}`)}`)
-
         if (step instanceof ActionStep) {
+            console.log(`actions: ${chalk.yellow(`${step.name}`)}`)
             return step.action(this);
         }
 
         if (step instanceof RequestStep) {
+            console.log(`request: ${chalk.green(`${step.name}`)}`)
             return this.executeRequestStep(step);
         }
 
-        throw new Error("Don't have step to execute");
+        throw new Error("Don't know step type");
     }
 
     private async executeRequestStep(step: RequestStep): Promise<void> {

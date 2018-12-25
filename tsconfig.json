@@ -18,6 +18,6 @@
     "forceConsistentCasingInFileNames": true,
     "lib": ["es6", "dom", "esnext"],
   },
-  "exclude": [ "node_modules"],
+  "exclude": [ "node_modules", "**/*.d.ts"],
   "types": [ "typePatches" ]
 }

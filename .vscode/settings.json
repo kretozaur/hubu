@@ -1,0 +1,14 @@
+{
+    "files.exclude": {
+        "**/node_modules/": true
+    },
+    "search.exclude": {
+        "out": true,
+        "**/node_modules/": true
+    },
+    "mocha.requires": ["ts-node/register"],
+    "mocha.nodeExec": "/usr/local/bin/node",
+    "mocha.enabled": true,
+    "mocha.sourceDir": "src",
+    "mocha.outputDir": ".buid"
+}
