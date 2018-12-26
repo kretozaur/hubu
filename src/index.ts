@@ -6,6 +6,7 @@ import { ActionStep } from "./models/ActionStep";
 import { RequestStep } from "./models/RequestStep";
 import { optionRequest } from "./models/optionRequest";
 import { optionAction } from "./models/optionAction";
+import { Response } from "./models/Response";
 
 export class hubu {
 
@@ -58,7 +59,7 @@ export class hubu {
     private async executeStep(step: StepBase): Promise<void> {
 
         if (step instanceof ActionStep) {
-            console.log(`actions: ${chalk.yellow(`${step.name}`)}`)
+            console.log(`actions: ${chalk.blue(`${step.name}`)}`)
             return step.action(this);
         }
 
@@ -85,9 +86,10 @@ export class hubu {
         return;
     }
 
-    private async callApi(step: RequestStep): Promise<any> {
+    private async callApi(step: RequestStep): Promise<Response> {
 
         const options = {};
+
         const url: string | undefined = this.baseEndpointUrl
         ? `${this.baseEndpointUrl}${step.url}`
         : step.url;
@@ -99,15 +101,28 @@ export class hubu {
         return new Promise((resolve, reject) => {
             if (step.request) {
                 Request.post(url, options, (error: any, response: Request.RequestResponse, body: any)  => {
-                    return error 
-                    ? reject(error)
-                    : resolve(body);
+                    if (error) {
+                        return reject(error);
+                    }
+
+                    const result = new Response();
+                    result.body = body;
+                    result.headers = response.headers;
+                    
+                    resolve(result);
                 });
             } else {
                 Request.get(url, (error: any, response: Request.RequestResponse, body: any)  => {
-                    return error 
-                    ? reject(error)
-                    : resolve(body);
+
+                    if (error) {
+                        return reject(error);
+                    }
+
+                    const result = new Response();
+                    result.body = body;
+                    result.headers = response.headers;
+                    
+                    resolve(result);
                 });
             }
         });
