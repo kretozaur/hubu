@@ -1,9 +1,10 @@
-import { hubu } from "../../src";
+import { Hubu } from "../../src";
 import { RequestStep } from "../../src/models/RequestStep";
 
-describe('integration test REST', function() {
-    it('E2E test for REST api', (done) => {
-        const e2e = new hubu("https://jsonplaceholder.typicode.com");
+describe("integration test REST", () => {
+
+    it("E2E test for REST api", (done) => {
+        const e2e = new Hubu("https://jsonplaceholder.typicode.com");
 
         e2e
             .request("[GET] get user", { url: "/users" })
@@ -20,11 +21,11 @@ describe('integration test REST', function() {
             }})
             .action("Set session", { action: (context) => {
                 const step = context.Steps[2] as RequestStep;
-                
-                if (step.response && step.request){
-                    const sessionId = step.response.headers["sessionId"]
+
+                if (step.response && step.request) {
+                    const sessionId = step.response.headers.sessionId;
                     step.request.headers = {};
-                    step.request.headers["sessionId"] = sessionId;
+                    step.request.headers.sessionId = sessionId;
                     step.request.body = {};
                 }
             }})
@@ -33,5 +34,6 @@ describe('integration test REST', function() {
                 done();
             })
             .catch((error) => done(error));
-    });
+    })
+    .timeout(2000);
 });

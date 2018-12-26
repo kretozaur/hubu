@@ -1,4 +1,4 @@
 export class Request {
-    headers: { [key: string]: any };
-    body: any;
+    public headers: { [key: string]: any };
+    public body: any;
 }

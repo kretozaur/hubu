@@ -1,3 +1,3 @@
 export abstract class StepBase {
-    name: string;
+    public name: string;
 }

@@ -1,5 +1,5 @@
-import { hubu } from "../index";
+import { Hubu } from "../index";
 
-export class optionAction {
-    action: (context: hubu) => void;
+export class OptionAction {
+    public action: (context: Hubu) => void;
 }

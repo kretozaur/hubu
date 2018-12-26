@@ -1,12 +1,12 @@
-import { hubu } from "../index";
-import { StepBase } from "./StepBase";
+import { Hubu } from "../index";
 import { Request } from "./Request";
 import { Response } from "./Response";
+import { StepBase } from "./StepBase";
 
 export class RequestStep extends StepBase {
-    url?: string;
-    request?: Request;
-    response?: Response;
-    before?: (context: hubu) => void;
-    after?: (context: hubu) => void;
+    public url?: string;
+    public request?: Request;
+    public response?: Response;
+    public before?: (context: Hubu) => void;
+    public after?: (context: Hubu) => void;
 }

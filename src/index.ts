@@ -1,21 +1,20 @@
-import * as Request from "request"
-import chalk from 'chalk'
+import * as Request from "request";
 
-import { StepBase } from "./models/StepBase";
 import { ActionStep } from "./models/ActionStep";
+import { OptionAction } from "./models/OptionAction";
+import { OptionRequest } from "./models/OptionRequest";
 import { RequestStep } from "./models/RequestStep";
-import { optionRequest } from "./models/optionRequest";
-import { optionAction } from "./models/optionAction";
 import { Response } from "./models/Response";
+import { StepBase } from "./models/StepBase";
 
-export class hubu {
+export class Hubu {
 
     private steps: StepBase[] = [];
 
     constructor(private baseEndpointUrl?: string) {
     }
 
-    public request(name: string, option: optionRequest): hubu {
+    public request(name: string, option: OptionRequest): Hubu {
 
         const { url, request, before, after } = option;
 
@@ -30,20 +29,20 @@ export class hubu {
         return this;
     }
 
-    public action(name: string, option: optionAction): hubu {
+    public action(name: string, option: OptionAction): Hubu {
 
         const { action } = option;
 
         const step = new ActionStep();
         step.name = name;
         step.action = action;
-    
+
         this.steps.push(step);
 
         return this;
     }
 
-    public async start(): Promise<hubu> {
+    public async start(): Promise<Hubu> {
 
         for (const step of this.steps) {
             await this.executeStep(step);
@@ -59,12 +58,10 @@ export class hubu {
     private async executeStep(step: StepBase): Promise<void> {
 
         if (step instanceof ActionStep) {
-            console.log(`actions: ${chalk.blue(`${step.name}`)}`)
             return step.action(this);
         }
 
         if (step instanceof RequestStep) {
-            console.log(`request: ${chalk.green(`${step.name}`)}`)
             return this.executeRequestStep(step);
         }
 
@@ -73,13 +70,13 @@ export class hubu {
 
     private async executeRequestStep(step: RequestStep): Promise<void> {
 
-        if(step.before) {
+        if (step.before) {
             step.before(this);
         }
 
         step.response = await this.callApi(step);
 
-        if(step.after) {
+        if (step.after) {
             step.after(this);
         }
 
@@ -88,7 +85,9 @@ export class hubu {
 
     private async callApi(step: RequestStep): Promise<Response> {
 
-        const options = {};
+        const options = {
+            headers: step.request ? step.request.headers : undefined,
+        };
 
         const url: string | undefined = this.baseEndpointUrl
         ? `${this.baseEndpointUrl}${step.url}`
@@ -108,7 +107,7 @@ export class hubu {
                     const result = new Response();
                     result.body = body;
                     result.headers = response.headers;
-                    
+
                     resolve(result);
                 });
             } else {
@@ -121,7 +120,7 @@ export class hubu {
                     const result = new Response();
                     result.body = body;
                     result.headers = response.headers;
-                    
+
                     resolve(result);
                 });
             }

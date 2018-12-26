@@ -1,9 +1,9 @@
-import { hubu } from "../index";
+import { Hubu } from "../index";
 
-export class optionRequest {
-    url?: string;
-    haders?: { [key: string]: any };
-    request?: any; 
-    before?: (context: hubu) => void;
-    after?: (context: hubu) => void;
+export class OptionRequest {
+    public url?: string;
+    public haders?: { [key: string]: any };
+    public request?: any;
+    public before?: (context: Hubu) => void;
+    public after?: (context: Hubu) => void;
 }

@@ -1,6 +1,6 @@
-import { hubu } from "../index";
+import { Hubu } from "../index";
 import { StepBase } from "./StepBase";
 
 export class ActionStep extends StepBase {
-    action: (context: hubu) => void;
+    public action: (context: Hubu) => void;
 }

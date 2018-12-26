@@ -27,7 +27,6 @@
     "chai": "^4.2.0"
   },
   "dependencies": {
-    "chalk": "^2.4.1",
     "request": "^2.88.0"
   },
   "directories": {

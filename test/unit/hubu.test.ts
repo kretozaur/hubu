@@ -1,14 +1,14 @@
 import * as chai from "chai";
 
-import { hubu as HUBU } from "../../src/index";
+import { Hubu as HUBU } from "../../src/index";
 
-const expect = chai.expect; 
+const expect = chai.expect;
 
-describe('hubu unit test', function() {
+describe("hubu unit test", function() {
 
     this.timeout(2000);
 
-    it('Should throw exception', (done) => {
+    it("Should throw exception", (done) => {
         const hubu = new HUBU();
 
         hubu.Steps.push({} as any);
@@ -21,11 +21,13 @@ describe('hubu unit test', function() {
             });
     });
 
-    it('Should execute one action', (done) => {
+    it("Should execute one action", (done) => {
         const hubu = new HUBU();
 
         hubu
-            .action("action #1", { action: (context) => {}})
+            .action("action #1", { action: (context) => {
+                const length = context.Steps.length;
+            }})
             .start()
             .then((context) => {
                 expect(context.Steps.length).be.equal(1);
@@ -36,7 +38,7 @@ describe('hubu unit test', function() {
             });
     });
 
-    it('Should execute one request', (done) => {
+    it("Should execute one request", (done) => {
         const hubu = new HUBU();
 
         hubu
